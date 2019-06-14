@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="+com.example.demo.dao.ProductDao">
+
+	<resultMap id="BaseResultMap" type="com.example.demo.entity.Product">
+		<result property="productId" column="product_id" />
+		<result property="productName" column="product_name" />
+		<result property="productType" column="product_type" />
+		<result property="productCategoryType" column="product_category_type" />
+		<result property="courseProductType" column="course_product_type" />
+		<result property="itemId" column="item_id" />
+		<result property="courseCategoryId" column="course_category_id" />
+		<result property="teachMode" column="teach_mode" />
+		<result property="categoryScope" column="category_scope" />
+		<result property="classTypeId" column="class_type_id" />
+		<result property="rehearType" column="rehear_type" />
+		<result property="isRehear" column="is_rehear" />
+		<result property="onlineCourseActiveType" column="online_course_active_type" />
+		<result property="onlineCourseDays" column="online_course_days" />
+		<result property="state" column="state" />
+		<result property="remark" column="remark" />
+		<result property="createDate" column="create_date" />
+		<result property="createUid" column="create_uid" />
+		<result property="modifyDate" column="modify_date" />
+		<result property="modifyUid" column="modify_uid" />
+		<result property="classHour" column="class_hour" />
+		<result property="courseStandardPrice" column="course_standard_price" />
+		<result property="classStandardHour" column="class_standard_hour" />
+		<result property="branchPriceOpenFlag" column="branch_price_open_flag" />
+		<result property="remoteType" column="remote_type" />
+	</resultMap>
+
+	<sql id="dynamicWhere">
+		<trim suffixOverrides="and">
+			<if test="productId != null and productId != '' ">
+				AND bit_product.product_id = #{productId}
+			</if>
+			<if test="productName != null and productName != '' ">
+				AND bit_product.product_name = #{productName}
+			</if>
+			<if test="productType != null ">
+				AND bit_product.product_type = #{productType}
+			</if>
+			<if test="productCategoryType != null ">
+				AND bit_product.product_category_type = #{productCategoryType}
+			</if>
+			<if test="courseProductType != null ">
+				AND bit_product.course_product_type = #{courseProductType}
+			</if>
+			<if test="itemId != null ">
+				AND bit_product.item_id = #{itemId}
+			</if>
+			<if test="courseCategoryId != null and courseCategoryId != '' ">
+				AND bit_product.course_category_id = #{courseCategoryId}
+			</if>
+			<if test="teachMode != null ">
+				AND bit_product.teach_mode = #{teachMode}
+			</if>
+			<if test="categoryScope != null ">
+				AND bit_product.category_scope = #{categoryScope}
+			</if>
+			<if test="classTypeId != null and classTypeId != '' ">
+				AND bit_product.class_type_id = #{classTypeId}
+			</if>
+			<if test="rehearType != null ">
+				AND bit_product.rehear_type = #{rehearType}
+			</if>
+			<if test="isRehear != null ">
+				AND bit_product.is_rehear = #{isRehear}
+			</if>
+			<if test="onlineCourseActiveType != null ">
+				AND bit_product.online_course_active_type = #{onlineCourseActiveType}
+			</if>
+			<if test="onlineCourseDays != null ">
+				AND bit_product.online_course_days = #{onlineCourseDays}
+			</if>
+			<if test="state != null ">
+				AND bit_product.state = #{state}
+			</if>
+			<if test="remark != null and remark != '' ">
+				AND bit_product.remark = #{remark}
+			</if>
+			<if test="createDate != null ">
+				AND bit_product.create_date = #{createDate}
+			</if>
+			<if test="createUid != null and createUid != '' ">
+				AND bit_product.create_uid = #{createUid}
+			</if>
+			<if test="modifyDate != null ">
+				AND bit_product.modify_date = #{modifyDate}
+			</if>
+			<if test="modifyUid != null and modifyUid != '' ">
+				AND bit_product.modify_uid = #{modifyUid}
+			</if>
+			<if test="classHour != null ">
+				AND bit_product.class_hour = #{classHour}
+			</if>
+			<if test="courseStandardPrice != null ">
+				AND bit_product.course_standard_price = #{courseStandardPrice}
+			</if>
+			<if test="classStandardHour != null ">
+				AND bit_product.class_standard_hour = #{classStandardHour}
+			</if>
+			<if test="branchPriceOpenFlag != null ">
+				AND bit_product.branch_price_open_flag = #{branchPriceOpenFlag}
+			</if>
+			<if test="remoteType != null ">
+				AND bit_product.remote_type = #{remoteType}
+			</if>
+		</trim>
+	</sql>
+
+	<sql id="queryColumns">
+		<![CDATA[
+			bit_product.product_id AS productId ,
+			bit_product.product_name AS productName ,
+			bit_product.product_type AS productType ,
+			bit_product.product_category_type AS productCategoryType ,
+			bit_product.course_product_type AS courseProductType ,
+			bit_product.item_id AS itemId ,
+			bit_product.course_category_id AS courseCategoryId ,
+			bit_product.teach_mode AS teachMode ,
+			bit_product.category_scope AS categoryScope ,
+			bit_product.class_type_id AS classTypeId ,
+			bit_product.rehear_type AS rehearType ,
+			bit_product.is_rehear AS isRehear ,
+			bit_product.online_course_active_type AS onlineCourseActiveType ,
+			bit_product.online_course_days AS onlineCourseDays ,
+			bit_product.state AS state ,
+			bit_product.remark AS remark ,
+			bit_product.create_date AS createDate ,
+			bit_product.create_uid AS createUid ,
+			bit_product.modify_date AS modifyDate ,
+			bit_product.modify_uid AS modifyUid ,
+			bit_product.class_hour AS classHour ,
+			bit_product.course_standard_price AS courseStandardPrice ,
+			bit_product.class_standard_hour AS classStandardHour ,
+			bit_product.branch_price_open_flag AS branchPriceOpenFlag ,
+			bit_product.remote_type AS remoteType
+		]]>
+	</sql>
+
+	<!-- 新增数据 -->
+	<insert id="save" parameterType="com.example.demo.entity.Product">
+		<![CDATA[
+			INSERT INTO
+			bit_product (
+				product_id ,
+				product_name ,
+				product_type ,
+				product_category_type ,
+				course_product_type ,
+				item_id ,
+				course_category_id ,
+				teach_mode ,
+				category_scope ,
+				class_type_id ,
+				rehear_type ,
+				is_rehear ,
+				online_course_active_type ,
+				online_course_days ,
+				state ,
+				remark ,
+				create_date ,
+				create_uid ,
+				modify_date ,
+				modify_uid ,
+				class_hour ,
+				course_standard_price ,
+				class_standard_hour ,
+				branch_price_open_flag ,
+				remote_type
+			) VALUES (
+				#{productId} ,
+				#{productName} ,
+				#{productType} ,
+				#{productCategoryType} ,
+				#{courseProductType} ,
+				#{itemId} ,
+				#{courseCategoryId} ,
+				#{teachMode} ,
+				#{categoryScope} ,
+				#{classTypeId} ,
+				#{rehearType} ,
+				#{isRehear} ,
+				#{onlineCourseActiveType} ,
+				#{onlineCourseDays} ,
+				#{state} ,
+				#{remark} ,
+				#{createDate} ,
+				#{createUid} ,
+				#{modifyDate} ,
+				#{modifyUid} ,
+				#{classHour} ,
+				#{courseStandardPrice} ,
+				#{classStandardHour} ,
+				#{branchPriceOpenFlag} ,
+				#{remoteType}
+ 			)
+		]]>
+		<selectKey resultType="java.lang.String" keyProperty="productId">
+			SELECT last_insert_id();
+		</selectKey>
+	</insert>
+
+	<!-- 修改数据 -->
+	<update id="update" parameterType="com.example.demo.entity.Product">
+		UPDATE bit_product
+		<trim prefix="set" suffixOverrides=",">
+			<if test="productId != null and productId != '' ">
+				product_id = #{productId},
+			</if>
+			<if test="productName != null and productName != '' ">
+				product_name = #{productName},
+			</if>
+			<if test="productType != null ">
+				product_type = #{productType},
+			</if>
+			<if test="productCategoryType != null ">
+				product_category_type = #{productCategoryType},
+			</if>
+			<if test="courseProductType != null ">
+				course_product_type = #{courseProductType},
+			</if>
+			<if test="itemId != null ">
+				item_id = #{itemId},
+			</if>
+			<if test="courseCategoryId != null and courseCategoryId != '' ">
+				course_category_id = #{courseCategoryId},
+			</if>
+			<if test="teachMode != null ">
+				teach_mode = #{teachMode},
+			</if>
+			<if test="categoryScope != null ">
+				category_scope = #{categoryScope},
+			</if>
+			<if test="classTypeId != null and classTypeId != '' ">
+				class_type_id = #{classTypeId},
+			</if>
+			<if test="rehearType != null ">
+				rehear_type = #{rehearType},
+			</if>
+			<if test="isRehear != null ">
+				is_rehear = #{isRehear},
+			</if>
+			<if test="onlineCourseActiveType != null ">
+				online_course_active_type = #{onlineCourseActiveType},
+			</if>
+			<if test="onlineCourseDays != null ">
+				online_course_days = #{onlineCourseDays},
+			</if>
+			<if test="state != null ">
+				state = #{state},
+			</if>
+			<if test="remark != null and remark != '' ">
+				remark = #{remark},
+			</if>
+			<if test="createDate != null ">
+				create_date = #{createDate},
+			</if>
+			<if test="createUid != null and createUid != '' ">
+				create_uid = #{createUid},
+			</if>
+			<if test="modifyDate != null ">
+				modify_date = #{modifyDate},
+			</if>
+			<if test="modifyUid != null and modifyUid != '' ">
+				modify_uid = #{modifyUid},
+			</if>
+			<if test="classHour != null ">
+				class_hour = #{classHour},
+			</if>
+			<if test="courseStandardPrice != null ">
+				course_standard_price = #{courseStandardPrice},
+			</if>
+			<if test="classStandardHour != null ">
+				class_standard_hour = #{classStandardHour},
+			</if>
+			<if test="branchPriceOpenFlag != null ">
+				branch_price_open_flag = #{branchPriceOpenFlag},
+			</if>
+			<if test="remoteType != null ">
+				remote_type = #{remoteType},
+			</if>
+		</trim>
+		WHERE product_id = #{productId}
+	</update>
+
+	<!-- 查询数据集合 -->
+	<select id="getAll" parameterType="com.example.demo.entity.Product" resultMap="BaseResultMap" resultType="java.util.List">
+		<![CDATA[
+			SELECT
+		]]>
+		<include refid="queryColumns" />
+			<![CDATA[
+				FROM bit_product WHERE 1=1
+			]]>
+		<include refid="dynamicWhere" />
+	</select>
+
+	<!-- 查询数据数量 -->
+	<select id="count" parameterType="com.example.demo.entity.Product" resultType="java.lang.Integer">
+		<![CDATA[
+			select count(1) from bit_product WHERE 1=1 
+		]]>
+		<include refid="dynamicWhere" />
+	</select>
+
+	<!-- 查询单条数据 -->
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" resultType="com.example.demo.entity.Product">
+		<![CDATA[
+		SELECT
+		]]>
+		<include refid="queryColumns" />
+		<![CDATA[
+			FROM bit_product WHERE product_id = #{productId}
+		]]>
+	</select>
+
+	<!-- 删除数据 -->
+	<delete id="delete" parameterType="java.lang.String">
+		<![CDATA[
+			DELETE FROM 
+			bit_product
+			WHERE
+			product_id = #{productId}
+		]]>
+	</delete>
+
+	<!-- 根据ids批量删除 -->
+	<delete id="deleteByIds"  parameterType = "java.lang.String">
+		<![CDATA[
+			delete from bit_product where 1>2
+		]]>
+		or id in  ${ids}
+	</delete>
+
+</mapper>
