@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="+com.example.demo.dao.ProductDao">
+<mapper namespace="com.example.demo.dao.ProductDao">
 
 	<resultMap id="BaseResultMap" type="com.example.demo.entity.Product">
 		<result property="productId" column="product_id" />
@@ -36,7 +36,7 @@
 				AND bit_product.product_id = #{productId}
 			</if>
 			<if test="productName != null and productName != '' ">
-				AND bit_product.product_name = #{productName}
+				AND bit_product.product_name like #{productName}
 			</if>
 			<if test="productType != null ">
 				AND bit_product.product_type = #{productType}
@@ -112,31 +112,31 @@
 
 	<sql id="queryColumns">
 		<![CDATA[
-			bit_product.product_id AS productId ,
-			bit_product.product_name AS productName ,
-			bit_product.product_type AS productType ,
-			bit_product.product_category_type AS productCategoryType ,
-			bit_product.course_product_type AS courseProductType ,
+			bit_product.product_id ,
+			bit_product.product_name ,
+			bit_product.product_type ,
+			bit_product.product_category_type ,
+			bit_product.course_product_type ,
 			bit_product.item_id AS itemId ,
-			bit_product.course_category_id AS courseCategoryId ,
-			bit_product.teach_mode AS teachMode ,
-			bit_product.category_scope AS categoryScope ,
-			bit_product.class_type_id AS classTypeId ,
-			bit_product.rehear_type AS rehearType ,
-			bit_product.is_rehear AS isRehear ,
-			bit_product.online_course_active_type AS onlineCourseActiveType ,
-			bit_product.online_course_days AS onlineCourseDays ,
-			bit_product.state AS state ,
-			bit_product.remark AS remark ,
-			bit_product.create_date AS createDate ,
-			bit_product.create_uid AS createUid ,
-			bit_product.modify_date AS modifyDate ,
-			bit_product.modify_uid AS modifyUid ,
-			bit_product.class_hour AS classHour ,
-			bit_product.course_standard_price AS courseStandardPrice ,
-			bit_product.class_standard_hour AS classStandardHour ,
-			bit_product.branch_price_open_flag AS branchPriceOpenFlag ,
-			bit_product.remote_type AS remoteType
+			bit_product.course_category_id ,
+			bit_product.teach_mode ,
+			bit_product.category_scope ,
+			bit_product.class_type_id ,
+			bit_product.rehear_type ,
+			bit_product.is_rehear ,
+			bit_product.online_course_active_type ,
+			bit_product.online_course_days ,
+			bit_product.state ,
+			bit_product.remark ,
+			bit_product.create_date ,
+			bit_product.create_uid ,
+			bit_product.modify_date ,
+			bit_product.modify_uid ,
+			bit_product.class_hour ,
+			bit_product.course_standard_price ,
+			bit_product.class_standard_hour ,
+			bit_product.branch_price_open_flag ,
+			bit_product.remote_type
 		]]>
 	</sql>
 
@@ -328,11 +328,9 @@
 	</delete>
 
 	<!-- 根据ids批量删除 -->
-	<delete id="deleteByIds"  parameterType = "java.lang.String">
-		<![CDATA[
-			delete from bit_product where 1>2
-		]]>
-		or id in  ${ids}
+	<delete id="deleteByIds">
+		delete from bit_product where 1>2
+		or product_id in (${ids})
 	</delete>
 
 </mapper>

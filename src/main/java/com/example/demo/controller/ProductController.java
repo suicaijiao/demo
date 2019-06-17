@@ -2,10 +2,15 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Product;
 import com.example.demo.service.ProductService;
+import com.google.common.base.Splitter;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class ProductController {
@@ -20,9 +25,14 @@ public class ProductController {
     }
 
     @GetMapping("/productList")
-    public List<Product> getProductList(Product product){
+    public Map<String,Object> getProductList(Product product){
+        Map<String,Object> map = new HashMap<>();
+        if(StringUtils.isNotBlank(product.getProductName())){
+            product.setProductName("%"+product.getProductName()+"%");
+        }
         List<Product> productList = productService.getAll(product);
-        return productList;
+        map.put("返回成功",productList);
+        return map;
     }
 
     @GetMapping("/productCount")

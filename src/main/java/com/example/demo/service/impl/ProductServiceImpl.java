@@ -1,8 +1,11 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.commons.util.UUIDGenerateUtils;
 import com.example.demo.dao.ProductDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 import java.util.List;
 import com.example.demo.entity.Product;
 import com.example.demo.service.ProductService;
@@ -14,11 +17,14 @@ public class ProductServiceImpl implements ProductService  {
 
 	@Override
 	public int save(Product product) {
+		product.setProductId(UUIDGenerateUtils.getUUID());
+		product.setCreateDate(new Date());
 		return productDao.save(product);
 	}
 
 	@Override
 	public int update(Product product) {
+		product.setModifyDate(new Date());
 		return productDao.update(product);
 	}
 
@@ -29,6 +35,7 @@ public class ProductServiceImpl implements ProductService  {
 
 	@Override
 	public int deleteByIds(String ids) {
+
 		return productDao.deleteByIds(ids);
 	}
 
